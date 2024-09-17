@@ -1,66 +1,69 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
-const knex = require('knex');
-const knexConfig = require('./knexfile');
-
-const db = knex(knexConfig);
-
+const cors = require('cors');
+const multer = require('multer');
+const knex = require('knex')(require('./knexfile'));
+const bcrypt = require('bcrypt');
 const app = express();
-const port = 3000;
 
-app.use(bodyParser.json());
+// Configure multer for file uploads
+const upload = multer({ dest: 'uploads/' });
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve index when the root URL is accessed
+// Registration endpoint
+app.post('/register-user', upload.single('image'), async (req, res) => {
+    const { name, email, password, userType } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+
+    try {
+        let insertData = { name, email, password: hashedPassword };
+        
+        if (userType === 'owner') {
+            insertData = { ...insertData, ...req.body.ownerDetails };
+            await knex('owners').insert(insertData);
+            res.json({ name, email, userType: 'owner' });
+        } else if (userType === 'rentee') {
+            insertData = { ...insertData, ...req.body.renteeDetails };
+            await knex('rentees').insert(insertData);
+            res.json({ name, email, userType: 'rentee' });
+        } else {
+            res.status(400).json({ message: 'Invalid user type' });
+        }
+    } catch (error) {
+        console.error('Registration Error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Serve index.html on root route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Serve register when the /register URL is accessed
-app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'register.html'));
+// For other routes such as /register.html, /login.html, etc., serve the static files
+app.get('/register.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
-// Serve login when the /login URL is accessed
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+app.get('/login.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.post('/register-user', async (req, res) => {
-  const { name, email, password } = req.body;
-
-  try {
-    if (!name || !email || !password) {
-      return res.json('Fill all the fields');
-    }
-
-    await db('Register').insert({ name, email, password });
-    res.json({ name, email });
-  } catch (error) {
-    if (error.code === 'ER_DUP_ENTRY') {
-      res.json('Email already exists');
-    } else {
-      res.status(500).json('Error inserting user');
-    }
-  }
+app.get('/logout.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'logout.html'));
 });
 
-app.post('/login-user', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const users = await db('Register').where({ email, password }).select('name', 'email');
-    if (users.length) {
-      res.json(users[0]);
-    } else {
-      res.json('Email or password is incorrect');
-    }
-  } catch (error) {
-    res.status(500).json('Error querying user');
-  }
+// Catch-all route for any other paths not handled above
+app.use((req, res) => {
+    res.status(404).send('Page not found');
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

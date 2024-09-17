@@ -1,4 +1,4 @@
-let navbar = document.querySelector('.header .navbar');
+const navbar = document.querySelector('.header .navbar');
 let lastScrollTop = 0;
 const navbarHeight = 100;
 
@@ -10,40 +10,39 @@ document.querySelector('#nav-close').onclick = () => {
     navbar.classList.remove('active');
 };
 
-let searchForm = document.querySelector('.search-form');
+const searchForm = document.querySelector('.search-form');
 
-document.querySelector('#search-btn').onclick = () => {
-    searchForm.classList.add('active');
-};
+const searchBtn = document.querySelector('#search-btn');
+const closeSearchBtn = document.querySelector('#close-search');
 
-document.querySelector('#close-search').onclick = () => {
-    searchForm.classList.remove('active');
-};
+if (searchBtn && closeSearchBtn) {
+    searchBtn.onclick = () => {
+        searchForm.classList.add('active');
+    };
 
-window.addEventListener('scroll', () => {
-    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    closeSearchBtn.onclick = () => {
+        searchForm.classList.remove('active');
+    };
+}
 
-    if (currentScroll > lastScrollTop) {
-        // Scrolling down
-        navbar.classList.add('hidden');
-    } else {
-        // Scrolling up
-        navbar.classList.remove('hidden');
+window.onscroll = () => {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > navbarHeight) {
+        navbar.classList.remove('active');
     }
 
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+};
 
-    if (window.scrollY > 0) {
-        document.querySelector('.header').classList.add('active');
-    } else {
-        document.querySelector('.header').classList.remove('active');
+document.querySelector('#loginLink').onclick = () => {
+    if (document.querySelector('#loginLink')) {
+        window.location.href = 'login.html';
     }
-});
+};
 
-window.onload = () => {
-    if (window.scrollY > 0) {
-        document.querySelector('.header').classList.add('active');
-    } else {
-        document.querySelector('.header').classList.remove('active');
+document.querySelector('#logout').onclick = () => {
+    if (document.querySelector('#logout')) {
+        window.location.href = 'logout.html';
     }
 };

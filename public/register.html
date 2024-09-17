@@ -3,74 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
-    <link rel="stylesheet" href="css/form.css">
+    <title>Register</title>
+    <link rel="stylesheet" href="CSS/form.css">
 </head>
 <body>
-    <div class="alert-box">
-        <p class="alert"></p>
-    </div>
-
-    <div class="form">
-        <h1 class="heading">Register</h1>
-
-        <input type="text" placeholder="Name" autocomplete="off" class="name" required>
-        <input type="email" placeholder="Email" autocomplete="off" class="email" required>
-        <input type="password" placeholder="Password" autocomplete="off" class="password" required>
-
-        <!-- Toggle Button -->
-        <button id="toggle-btn" class="submit-btn" onclick="toggleForm()">Get property for rent</button>
-        <input type="hidden" id="user_type" value="rentee">
-        
-        <!-- Section for Owner -->
-        <div id="owner-section" class="transparent-section" style="display: none;">
-            <input type="text" id="property_type" placeholder="Property type (1BHK, 2BHK, 3BHK)" required>
-            <h5> Address </h5>
-            <input type="text" id="house_number" placeholder="House/Apartment number" required>
-            <input type="text" id="colony_area" placeholder="Colony/Area/Sector" required>
-            <input type="text" id="landmark" placeholder="Landmark (optional)">
-            <input type="text" id="pincode" placeholder="Pincode" required>
-            <h5> Rentee details </h5>
-            <input type="text" id="property_for" placeholder="Property for (Male/female)" required>
-            <input type="text" id="room_for" placeholder="Room for (n people)" required>
-            <h5> Property details </h5>
-            <input type="text" id="ac_available" placeholder="AC Available? (Yes (1,2,..)/No)" required>
-            <input type="text" id="television_available" placeholder="Television Available? (Yes/No)" required>
-            <input type="text" id="geaser_available" placeholder="Geaser Available? (Yes/No)" required>
-            <h5> Upload Image </h5>
-            <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="displayFileName()" />
-            <button type="button" onclick="document.getElementById('fileInput').click();">Upload Image</button>
-            <h6><p id="fileName"></p></h6>
-            <h5> Price </h5>
-            <input type="text" id="price" placeholder="Price per day/month" required>
-        </div>
-        
-        <!-- Section for Rentee -->
-        <div id="rentee-section" class="transparent-section">
-            <input type="text" id="age" placeholder="Age" required>
-            <input type="text" id="city" placeholder="City" required>
-            <input type="text" id="number_of_travelmates" placeholder="Number of travelmates" required>
-            <input type="text" id="budget" placeholder="Budget" required>
-
-            <div class="radio-group">
-                <input type="radio" id="male" name="gender" value="Male" onclick="showFemaleGroupInput()">
-                <label for="male">Male</label>
-              
-                <input type="radio" id="female" name="gender" value="Female" onclick="hideFemaleGroupInput()">
-                <label for="female">Female</label>
-            </div>
+    <div class="container">
+        <form class="form" id="registerForm">
+            <h2>Register</h2>
             
-            <!-- Additional input field for the Male selection -->
-            <div id="female-group-section" style="display: none;">
-                <label for="female-group">Is there any female in the group?</label>
-                <input type="text" id="female-group" placeholder="Yes/No">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            
+            <label for="user_type">I am a:</label>
+            <select id="user_type" required>
+                <option value="">Select User Type</option>
+                <option value="owner">Property Owner</option>
+                <option value="rentee">Rentee</option>
+            </select>
+
+            <!-- Owner-specific fields -->
+            <div id="owner-section" style="display: none;">
+                <h3>Property Details</h3>
+                <label for="property_type">Property Type:</label>
+                <input type="text" id="property_type">
+                
+                <label for="house_number">House Number:</label>
+                <input type="text" id="house_number">
+                
+                <label for="colony_area">Colony/Area:</label>
+                <input type="text" id="colony_area">
+                
+                <label for="landmark">Landmark:</label>
+                <input type="text" id="landmark">
+                
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode">
+                
+                <label for="property_for">Property For:</label>
+                <input type="text" id="property_for">
+                
+                <label for="room_for">Room For:</label>
+                <input type="text" id="room_for">
+                
+                <label for="ac_available">AC Available:</label>
+                <input type="text" id="ac_available">
+                
+                <label for="television_available">Television Available:</label>
+                <input type="text" id="television_available">
+                
+                <label for="geaser_available">Geyser Available:</label>
+                <input type="text" id="geaser_available">
+                
+                <label for="price">Price:</label>
+                <input type="text" id="price">
+                
+                <label for="fileInput">Image:</label>
+                <input type="file" id="fileInput">
             </div>
+
+            <!-- Rentee-specific fields -->
+            <div id="rentee-section" style="display: none;">
+                <h3>Rentee Details</h3>
+                <label for="age">Age:</label>
+                <input type="text" id="age">
+                
+                <label for="city">City:</label>
+                <input type="text" id="city">
+                
+                <label for="number_of_travelmates">Number of Travelmates:</label>
+                <input type="text" id="number_of_travelmates">
+                
+                <label for="budget">Budget:</label>
+                <input type="text" id="budget">
+                
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label>
+                
+                <label for="female-group">Female Group:</label>
+                <input type="text" id="female-group">
+            </div>
+
+            <button class="submit-btn" type="submit">Register</button>
+        </form>
+        <div class="alert-box">
+            <div class="alert"></div>
         </div>
-
-        <button class="submit-btn">Register</button>
-        <a href="./login.html" class="link">Already have an account? Log in here</a>
+        <script src="js/form.js"></script>
     </div>
-
-    <script src="js/form.js"></script>
 </body>
 </html>
