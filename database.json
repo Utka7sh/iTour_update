@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name": "Utkarsh Upadhyay",
+      "email": "utkarshu345@gmail.com",
+      "password": "Upass07",
+      "userType": "owner",
+      "ownerDetails": {
+        "property_type": "",
+        "house_number": "",
+        "colony_area": "",
+        "landmark": "",
+        "pincode": "",
+        "property_for": "",
+        "room_for": "",
+        "ac_available": "",
+        "television_available": "",
+        "geaser_available": "",
+        "price": "",
+        "image_url": ""
+      }
+    }
+  ]
+}

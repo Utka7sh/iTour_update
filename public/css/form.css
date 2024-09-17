@@ -1,0 +1,223 @@
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+/* Body styling */
+body {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../images/home1.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Form styling */
+.form {
+    width: 400px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    ;
+}
+
+.heading {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 300;
+    margin-bottom: 50px;
+    opacity: 1; /* Make sure the heading is visible */
+}
+
+/* Input and button styling */
+input,
+.submit-btn, button {
+    width: 80%;
+    height: 35px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: #fff;
+    padding: 15px;
+    transition: 0.5s;
+    text-transform: capitalize;
+    opacity: 1; /* Make sure inputs are visible */
+}
+
+input::placeholder {
+    color: #fff;
+}
+
+input:focus,
+.submit-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+input:focus::placeholder {
+    color: #000;
+}
+
+.submit-btn, button {
+    width: auto;
+    padding: 0 20px;
+    cursor: pointer;
+    margin: 50px auto 0;
+}
+
+/* Link styling */
+.link {
+    text-align: center;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    margin: 30px auto;
+}
+
+.link:hover {
+    color: #fff;
+}
+
+/* Alert box styling */
+.alert-box {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 150px;
+    max-width: 90%;
+    padding: 10px;
+    background: rgb(255, 119, 119);
+    border-top: 10px solid rgb(255, 37, 37);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    transition: 1s;
+}
+
+/* Email input styling */
+.email {
+    text-transform: lowercase;
+}
+
+/* Owner and rentee sections styling */
+.transparent-section {
+    display: block; /* Initially visible */
+    /* background-color: rgba(255, 255, 255, 0.3);  */
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px 0;
+    color: #fff;
+    opacity: 1; /* Ensure sections are visible */
+}
+
+#owner-section,
+#rentee-section {
+    display: block;
+    opacity: 1; /* Make sure owner and rentee sections are visible */
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Overriding input styling for owner and rentee sections */
+input, .submit-btn, button {
+    width: 80%;
+    height: 35px;
+    margin: 10px auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+}
+
+input::placeholder {
+    color: #fff;
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.7);
+    color: #000;
+}
+
+/* Fix opacity issue on the form elements */
+input,
+.submit-btn, button
+.link {
+    opacity: 1 !important; /* Override any previous opacity settings to ensure visibility */
+}
+/* General form styling */
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  /* Style for radio buttons */
+  input[type="radio"] {
+    /* Set a custom size for radio buttons */
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+  }
+  
+  /* Styling the radio button label */
+  .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    align-content: center;
+    margin-left: 30%;
+  }
+  
+  .radio-group label {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #fff;
+    font-weight: normal;
+  }
+  
+  /* Example of improving radio buttons layout with better spacing */
+  .radio-group {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  input[type="radio"] + label {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  /* Optional: Add some hover effect */
+  input[type="radio"]:hover {
+    cursor: pointer;
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    transition: transform 0.2s ease;
+  }
+  
