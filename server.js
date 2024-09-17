@@ -18,20 +18,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Registration endpoint
 app.post('/register-user', upload.single('image'), async (req, res) => {
-    const { name, email, password, userType } = req.body;
+    const { name, email, number,  password, userType } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
 
     try {
-        let insertData = { name, email, password: hashedPassword };
+        let insertData = { name, email, number, password: hashedPassword };
         
         if (userType === 'owner') {
             insertData = { ...insertData, ...req.body.ownerDetails };
             await knex('owners').insert(insertData);
-            res.json({ name, email, userType: 'owner' });
+            res.json({ name, email, number, userType: 'owner' });
         } else if (userType === 'rentee') {
             insertData = { ...insertData, ...req.body.renteeDetails };
             await knex('rentees').insert(insertData);
-            res.json({ name, email, userType: 'rentee' });
+            res.json({ name, email, number, userType: 'rentee' });
         } else {
             res.status(400).json({ message: 'Invalid user type' });
         }

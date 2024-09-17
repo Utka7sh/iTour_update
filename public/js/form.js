@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const userData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
+            number: document.getElementById('number').value,
             password: document.getElementById('password').value,
+            
             userType: userTypeSelect.value
         };
 

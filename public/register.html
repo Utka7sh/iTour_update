@@ -11,18 +11,16 @@
         <form class="form" id="registerForm">
             <h2>Register</h2>
             
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
+            <input type="text" id="name" required placeholder="Full Name">
             
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
+            <input type="email" id="email" required placeholder="Email">
+
+            <input type="number" id="number" required placeholder="Phone Number">
             
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
+            <input type="password" id="password" required placeholder="Password">
             
-            <label for="user_type">I am a:</label>
             <select id="user_type" required>
-                <option value="">Select User Type</option>
+                <option value="">I am a</option>
                 <option value="owner">Property Owner</option>
                 <option value="rentee">Rentee</option>
             </select>
@@ -69,27 +67,27 @@
 
             <!-- Rentee-specific fields -->
             <div id="rentee-section" style="display: none;">
-                <h3>Rentee Details</h3>
-                <label for="age">Age:</label>
-                <input type="text" id="age">
+                <h3>Rentee Details:</h3><br>
+                <input type="text" id="age" placeholder="Age">
                 
-                <label for="city">City:</label>
-                <input type="text" id="city">
+                <input type="text" id="city" placeholder="City">
                 
-                <label for="number_of_travelmates">Number of Travelmates:</label>
-                <input type="text" id="number_of_travelmates">
+                <input type="text" id="number_of_travelmates" placeholder="Number of Travelmates">
                 
-                <label for="budget">Budget:</label>
-                <input type="text" id="budget">
+                <input type="text" id="budget" placeholder="Budget">
                 
-                <label>Gender:</label>
-                <input type="radio" id="male" name="gender" value="Male">
-                <label for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="Female">
-                <label for="female">Female</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" id="male" name="gender" value="Male">
+                        <span class="radio-custom">Male</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" id="female" name="gender" value="Female">
+                        <span class="radio-custom">Female</span>
+                    </label>
+                </div>
                 
-                <label for="female-group">Female Group:</label>
-                <input type="text" id="female-group">
+                <input type="text" id="female-group" placeholder="Are there any female in your group?(Yes/No)">
             </div>
 
             <button class="submit-btn" type="submit">Register</button>

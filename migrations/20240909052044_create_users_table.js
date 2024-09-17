@@ -4,6 +4,7 @@ exports.up = function(knex) {
             table.increments('id').primary();
             table.string('name').notNullable();
             table.string('email').notNullable().unique();
+            table.string('number').notNullable().unique();
             table.string('password').notNullable();
             table.string('property_type').nullable();
             table.string('house_number').nullable();
@@ -22,6 +23,7 @@ exports.up = function(knex) {
             table.increments('id').primary();
             table.string('name').notNullable();
             table.string('email').notNullable().unique();
+            table.string('number').notNullable().unique();
             table.string('password').notNullable();
             table.string('age').nullable();
             table.string('city').nullable();
