@@ -68,7 +68,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStorage.setItem('name', data.name);
                 sessionStorage.setItem('email', data.email);
                 sessionStorage.setItem('userType', data.userType);
-                window.location.href = data.userType === 'owner' ? '/owner-dashboard' : '/rentee-dashboard';
+                window.location.href = data.userType === 'owner' ? '/owner-dashboard.html' : '/rentee-dashboard.html';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    function alertBox(message) {
+        const alertContainer = document.querySelector('.alert-box');
+        const alertMsg = document.querySelector('.alert');
+        alertMsg.innerHTML = message;
+
+        alertContainer.style.top = '5%';
+        setTimeout(() => {
+            alertContainer.style.top = null;
+        }, 5000);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('login-btn');
+
+    loginBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) {
+            alertBox('Please fill in both email and password.');
+            return;
+        }
+
+        fetch('/login-user', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alertBox(data.message);
+            } else {
+                sessionStorage.setItem('name', data.name);
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('userType', data.userType);
+                window.location.href = data.userType === 'owner' ? '/owner-dashboard.html' : '/rentee-dashboard.html';
             }
         })
         .catch(error => console.error('Error:', error));
