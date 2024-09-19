@@ -86,6 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('login-btn');
 
@@ -110,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.error) {
                 alertBox(data.message);
             } else {
+                // Store user details in sessionStorage
+                sessionStorage.setItem('userId', data.id); // Store user ID
                 sessionStorage.setItem('name', data.name);
                 sessionStorage.setItem('email', data.email);
                 sessionStorage.setItem('userType', data.userType);

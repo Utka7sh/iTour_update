@@ -16,6 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+
 // Registration endpoint
 app.post('/register-user', upload.single('image'), async (req, res) => {
     const { name, email, number,  password, userType } = req.body;
@@ -41,6 +45,9 @@ app.post('/register-user', upload.single('image'), async (req, res) => {
     }
 });
 
+
+
+
 app.post('/login-user', async (req, res) => {
     const { email, password } = req.body;
 
@@ -65,6 +72,7 @@ app.post('/login-user', async (req, res) => {
 
         // Send rentee details on successful login
         res.json({
+            id: user.id, // Include user ID
             name: user.name,
             email: user.email,
             number: user.number,
@@ -80,6 +88,32 @@ app.post('/login-user', async (req, res) => {
         res.status(500).json({ error: true, message: 'Server error' });
     }
 });
+
+
+
+
+
+// Endpoint to get rentee details
+app.get('/api/rentee-dashboard/:id', async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        let user = await knex('rentees').where({ id: userId }).first();
+        if (!user) {
+            user = await knex('owners').where({ id: userId }).first();
+        }
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.json(user);
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 
 
 
