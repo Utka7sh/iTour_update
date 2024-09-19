@@ -1,48 +1,43 @@
 const navbar = document.querySelector('.header .navbar');
-let lastScrollTop = 0;
 const navbarHeight = 100;
+let lastScrollTop = 0;
 
-document.querySelector('#menu-btn').onclick = () => {
+document.querySelector('#menu-btn')?.addEventListener('click', () => {
     navbar.classList.add('active');
-};
+});
 
-document.querySelector('#nav-close').onclick = () => {
+document.querySelector('#nav-close')?.addEventListener('click', () => {
     navbar.classList.remove('active');
-};
+});
 
 const searchForm = document.querySelector('.search-form');
-
 const searchBtn = document.querySelector('#search-btn');
 const closeSearchBtn = document.querySelector('#close-search');
 
 if (searchBtn && closeSearchBtn) {
-    searchBtn.onclick = () => {
+    searchBtn.addEventListener('click', () => {
         searchForm.classList.add('active');
-    };
+    });
 
-    closeSearchBtn.onclick = () => {
+    closeSearchBtn.addEventListener('click', () => {
         searchForm.classList.remove('active');
-    };
+    });
 }
 
-window.onscroll = () => {
+window.addEventListener('scroll', () => {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     if (scrollTop > navbarHeight) {
         navbar.classList.remove('active');
     }
 
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-};
+    lastScrollTop = Math.max(scrollTop, 0);
+});
 
-document.querySelector('#loginLink').onclick = () => {
-    if (document.querySelector('#loginLink')) {
-        window.location.href = 'login.html';
-    }
-};
+document.querySelector('#loginLink')?.addEventListener('click', () => {
+    window.location.href = 'login.html';
+});
 
-document.querySelector('#logout').onclick = () => {
-    if (document.querySelector('#logout')) {
-        window.location.href = 'logout.html';
-    }
-};
+document.querySelector('#logout')?.addEventListener('click', () => {
+    window.location.href = 'logout.html';
+});
